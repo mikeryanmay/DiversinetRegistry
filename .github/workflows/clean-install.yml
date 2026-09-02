@@ -23,9 +23,6 @@ jobs:
             arch: x64
           - os: macos-15
             arch: aarch64
-    env:
-      JULIA_DEPOT_PATH: ${{ runner.temp }}/diversinet-depot
-      JULIA_PROJECT: ${{ runner.temp }}/diversinet-environment
     steps:
       - uses: actions/checkout@v4
       - uses: julia-actions/setup-julia@v2
@@ -34,6 +31,9 @@ jobs:
           arch: ${{ matrix.arch }}
       - name: Install and test from public registries
         shell: bash
+        env:
+          JULIA_DEPOT_PATH: ${{ runner.temp }}/diversinet-depot
+          JULIA_PROJECT: ${{ runner.temp }}/diversinet-environment
         run: |
           mkdir -p "$JULIA_PROJECT"
           julia --startup-file=no -e '
