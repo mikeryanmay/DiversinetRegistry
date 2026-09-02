@@ -1,0 +1,6 @@
+name = "DiversinetRegistry"
+uuid = "bdd43285-69eb-4176-bcc1-4bf4e2c289ef"
+repo = "https://github.com/mikeryanmay/DiversinetRegistry.git"
+description = "Registry for Diversinet prerelease packages"
+
+[packages]
