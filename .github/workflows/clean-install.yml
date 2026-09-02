@@ -1,0 +1,65 @@
+name: Clean install
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  install-and-test:
+    name: Julia 1.12 - ${{ matrix.os }} - ${{ matrix.arch }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            arch: x64
+          - os: ubuntu-24.04-arm
+            arch: aarch64
+          - os: macos-15-intel
+            arch: x64
+          - os: macos-15
+            arch: aarch64
+    env:
+      JULIA_DEPOT_PATH: ${{ runner.temp }}/diversinet-depot
+      JULIA_PROJECT: ${{ runner.temp }}/diversinet-environment
+    steps:
+      - uses: actions/checkout@v4
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: '1.12'
+          arch: ${{ matrix.arch }}
+      - name: Install and test from public registries
+        shell: bash
+        run: |
+          mkdir -p "$JULIA_PROJECT"
+          julia --startup-file=no -e '
+            import Pkg
+            Pkg.Registry.add("General")
+            Pkg.Registry.add(Pkg.RegistrySpec(
+                url="https://github.com/mikeryanmay/DiversinetRegistry.git",
+            ))
+            Pkg.add("Diversinet")
+            Pkg.test("Diversinet")
+            using Diversinet
+            likelihood = Diversinet.computeLogLikelihood(
+                "((A:0.5,B:0.5):0.25,C:0.75):0.25;";
+                λ=0.5,
+                μ=0.1,
+                ρ=0.5,
+                kmax=16,
+            )
+            @assert isfinite(likelihood)
+            networks = Diversinet.simulate(
+                1.0,
+                1;
+                λ=1.0,
+                condition=Diversinet.Tree,
+                root=true,
+            )
+            @assert length(networks) == 1
+            @assert !isempty(only(networks))
+          '

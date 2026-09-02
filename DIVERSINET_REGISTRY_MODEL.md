@@ -351,11 +351,12 @@ Repository: `DiversinetRegistry`
 
 ## Phase 5: Clean-Environment Release Testing
 
-- [ ] Test with an empty temporary Julia depot.
-- [ ] Ensure no artifact overrides are active.
-- [ ] Ensure no local packages are developed into the test environment.
-- [ ] Ensure the system does not supply a fallback `libdiversinet`.
-- [ ] Run the complete reviewer workflow:
+- [x] Test with an empty temporary Julia 1.12.6 depot.
+- [x] Ensure no artifact overrides are active.
+- [x] Ensure no local packages are developed into the test environment.
+- [x] Ensure the system does not supply a fallback `libdiversinet`; verify the
+      loaded core path is inside the clean depot's artifact tree.
+- [x] Run the complete reviewer workflow:
 
   ```julia
   import Pkg
@@ -370,19 +371,22 @@ Repository: `DiversinetRegistry`
   using Diversinet
   ```
 
-- [ ] Run a manuscript-relevant likelihood example.
-- [ ] Run a manuscript-relevant simulation example.
+- [x] Run a representative three-taxon likelihood example (result
+      `-3.7565154492458603`).
+- [x] Run a rooted, tree-conditioned simulation example.
 - [ ] Test all supported operating systems.
-- [ ] Test the minimum supported Julia version.
-- [ ] Test the current stable Julia version.
-- [ ] Test a clean reinstall after removing the depot.
-- [ ] Add this clean-install test to CI.
+- [x] Test the minimum supported Julia version (Julia 1.12).
+- [x] Test the current supported stable Julia series (Julia 1.12).
+- [x] Test a clean reinstall after removing the first depot; a second public
+      registry installation and likelihood calculation passed.
+- [x] Add the reviewer clean-install test to CI for Linux and macOS on x86-64
+      and ARM64; execution awaits review and push.
 
 ### Acceptance criteria
 
-- [ ] A reviewer can install and run Diversinet using only Julia, Git, and
+- [x] A reviewer can install and run Diversinet using only Julia, Git, and
       network access.
-- [ ] No undocumented environment variables or system libraries are required.
+- [x] No undocumented environment variables or system libraries are required.
 - [ ] CI reproduces the same installation steps given to reviewers.
 
 ## Phase 6: Manuscript Reproducibility Release
