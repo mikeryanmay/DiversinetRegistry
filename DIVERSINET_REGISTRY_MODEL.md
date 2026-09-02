@@ -338,7 +338,7 @@ Repository: `DiversinetRegistry`
       `Diversinet_jll` tree `2fb827251e972b6055ff8b376339481182e41217`
       and `Diversinet` tree `65125cc4d2ec71106c36f9332c2a10f0b618664d`.
 - [x] Verify dependency UUIDs and compatibility ranges are correct.
-- [ ] Push all registry commits to GitHub.
+- [x] Push all registry and installation-workflow commits to GitHub.
 
 ### Acceptance criteria
 
@@ -374,7 +374,9 @@ Repository: `DiversinetRegistry`
 - [x] Run a representative three-taxon likelihood example (result
       `-3.7565154492458603`).
 - [x] Run a rooted, tree-conditioned simulation example.
-- [ ] Test all supported operating systems.
+- [x] Test all supported operating systems and architectures through the clean
+      public-registry workflow: Linux and macOS on x86-64 and ARM64 (GitHub
+      Actions run `33673252097`).
 - [x] Test the minimum supported Julia version (Julia 1.12).
 - [x] Test the current supported stable Julia series (Julia 1.12).
 - [x] Test a clean reinstall after removing the first depot; a second public
@@ -387,7 +389,9 @@ Repository: `DiversinetRegistry`
 - [x] A reviewer can install and run Diversinet using only Julia, Git, and
       network access.
 - [x] No undocumented environment variables or system libraries are required.
-- [ ] CI reproduces the same installation steps given to reviewers.
+- [x] CI reproduces the same public-registry installation, package tests,
+      likelihood calculation, and simulation given to reviewers (GitHub
+      Actions run `33673252097`).
 
 ## Phase 6: Manuscript Reproducibility Release
 
