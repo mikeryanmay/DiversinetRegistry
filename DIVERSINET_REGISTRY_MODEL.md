@@ -393,6 +393,57 @@ Repository: `DiversinetRegistry`
       likelihood calculation, and simulation given to reviewers (GitHub
       Actions run `33673252097`).
 
+## Phase 5A: Standalone Docker Distribution
+
+Repository: `DiversinetDocker`
+
+This is a downstream, optional distribution of a complete Diversinet runtime.
+It installs immutable revisions of `Diversinet.jl` and `Diversinet_jll`
+directly from their public GitHub repositories and does not depend on
+`DiversinetRegistry`.
+
+- [x] Create an empty local directory named `DiversinetDocker`.
+- [x] Create a dedicated public GitHub repository named `DiversinetDocker` and
+      connect the local `main` branch to its `origin` remote.
+- [x] Add a Julia `Project.toml` and `Manifest.toml` that pin:
+  - [x] `Diversinet.jl` tag `v0.1.0`;
+  - [x] `Diversinet_jll` tag `Diversinet-v0.1.0+1`;
+  - [x] all transitive Julia dependencies.
+- [x] Add a Dockerfile based on the supported Julia 1.12 image.
+- [x] Have the Docker build instantiate and precompile the committed Julia
+      environment without adding `DiversinetRegistry`.
+- [x] Verify `using Diversinet` during the image build.
+- [x] Add a `.dockerignore` that excludes repository and development files not
+      needed by the image.
+- [x] Document local image build, interactive use, non-interactive use, and
+      bind-mounting a host working directory.
+- [x] Build and smoke-test the image locally on Linux ARM64 through Docker
+      Desktop, using Julia 1.12.6 and an unprivileged container user.
+- [x] Add GitHub Actions to build the image on pushes and pull requests.
+- [x] Publish `latest` and commit-addressed images to GitHub Container Registry
+      (`ghcr.io/mikeryanmay/diversinet`); verified by GitHub Actions run
+      `33681315599` for Linux x86-64 and ARM64.
+- [x] Publish versioned image `ghcr.io/mikeryanmay/diversinet:0.1.0` from the
+      immutable `DiversinetDocker` tag `v0.1.0`; verified for Linux x86-64 and
+      ARM64 by GitHub Actions run `33682231267`.
+- [x] Document the relationship between Diversinet image versions and the
+      pinned Julia/JLL revisions.
+- [x] Document an image-retention and release-tagging policy in the
+      `DiversinetDocker` README.
+
+### Acceptance criteria
+
+- [x] A user with Docker needs no local Julia, compiler, Meson, Boost, Eigen,
+      custom Julia registry, or C++ checkout.
+- [x] Building the same repository commit resolves the same Julia and JLL
+      source revisions.
+- [x] The image loads Diversinet and runs representative likelihood and
+      simulation examples.
+- [x] The versioned image is anonymously readable from GHCR without stored
+      Docker credentials.
+- [x] Docker remains an optional downstream distribution and does not alter
+      normal Julia installation or future migration to General.
+
 ## Phase 6: Manuscript Reproducibility Release
 
 - [ ] Create coordinated release versions for:
