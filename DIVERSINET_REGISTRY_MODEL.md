@@ -297,9 +297,9 @@ Repository: `Diversinet.jl`
 
 ### Acceptance criteria
 
-- [ ] `Pkg.add("Diversinet")` requires no compiler, Meson, Boost, Eigen, or
-      local C++ checkout. The equivalent URL-based installation is verified;
-      the exact name-based command awaits registry creation in Phase 4.
+- [x] `Pkg.add("Diversinet")` requires no compiler, Meson, Boost, Eigen, or
+      local C++ checkout; verified from a clean depot against the locally
+      generated registry.
 - [x] `using Diversinet` succeeds from a clean depot using Julia 1.12.6.
 - [x] Core functionality passes without Homebrew or system `libdiversinet`;
       both native libraries resolve inside the clean depot's artifact tree.
@@ -311,10 +311,10 @@ Repository: `Diversinet.jl`
 
 Repository: `DiversinetRegistry`
 
-- [ ] Create an empty public GitHub repository named `DiversinetRegistry`.
-- [ ] Install `LocalRegistry.jl` in a maintainer environment, not as a
+- [x] Create an empty public GitHub repository named `DiversinetRegistry`.
+- [x] Install `LocalRegistry.jl` in a maintainer environment, not as a
       dependency of Diversinet.
-- [ ] Initialize the registry with `LocalRegistry.create_registry`:
+- [x] Initialize the registry with `LocalRegistry.create_registry`:
 
   ```julia
   using LocalRegistry
@@ -327,22 +327,26 @@ Repository: `DiversinetRegistry`
   )
   ```
 
-- [ ] Verify the generated registry UUID and commit it permanently.
-- [ ] Add a short registry README with user installation instructions.
-- [ ] Register packages in dependency order:
-  1. [ ] `Diversinet_jll`
-  2. [ ] `Diversinet`
-- [ ] Verify registry entries point to public Git repositories.
-- [ ] Verify registered versions point to committed, immutable Git trees.
-- [ ] Verify dependency UUIDs and compatibility ranges are correct.
+- [x] Verify generated registry UUID
+      `bdd43285-69eb-4176-bcc1-4bf4e2c289ef` and commit it permanently.
+- [x] Add a short registry README with user installation instructions.
+- [x] Register packages in dependency order:
+  1. [x] `Diversinet_jll` 0.1.0+1
+  2. [x] `Diversinet` 0.1.0
+- [x] Verify registry entries point to public Git repositories.
+- [x] Verify registered versions point to committed, immutable Git trees:
+      `Diversinet_jll` tree `2fb827251e972b6055ff8b376339481182e41217`
+      and `Diversinet` tree `65125cc4d2ec71106c36f9332c2a10f0b618664d`.
+- [x] Verify dependency UUIDs and compatibility ranges are correct.
 - [ ] Push all registry commits to GitHub.
 
 ### Acceptance criteria
 
 - [ ] A new Julia depot can add `DiversinetRegistry` from its public URL.
-- [ ] `Pkg.add("Diversinet")` resolves both packages without URL or path
-      overrides.
-- [ ] General and DiversinetRegistry can be installed simultaneously.
+- [x] `Pkg.add("Diversinet")` resolves both packages without package URL or
+      path overrides when using the locally generated registry.
+- [x] General and DiversinetRegistry can be installed simultaneously; verified
+      in a clean Julia 1.12.6 depot.
 
 ## Phase 5: Clean-Environment Release Testing
 
