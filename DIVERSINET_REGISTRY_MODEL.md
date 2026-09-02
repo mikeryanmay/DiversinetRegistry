@@ -342,7 +342,8 @@ Repository: `DiversinetRegistry`
 
 ### Acceptance criteria
 
-- [ ] A new Julia depot can add `DiversinetRegistry` from its public URL.
+- [x] A new Julia 1.12.6 depot can add `DiversinetRegistry` from its public
+      GitHub URL; add General explicitly first in a completely empty depot.
 - [x] `Pkg.add("Diversinet")` resolves both packages without package URL or
       path overrides when using the locally generated registry.
 - [x] General and DiversinetRegistry can be installed simultaneously; verified
@@ -358,6 +359,7 @@ Repository: `DiversinetRegistry`
 
   ```julia
   import Pkg
+  Pkg.Registry.add("General")
   Pkg.Registry.add(
       Pkg.RegistrySpec(
           url="https://github.com/mikeryanmay/DiversinetRegistry.git",

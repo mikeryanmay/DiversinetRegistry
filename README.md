@@ -9,6 +9,7 @@ macOS. Add this registry once, then install Diversinet by name:
 
 ```julia
 import Pkg
+Pkg.Registry.add("General")
 Pkg.Registry.add(
     Pkg.RegistrySpec(
         url="https://github.com/mikeryanmay/DiversinetRegistry.git",
