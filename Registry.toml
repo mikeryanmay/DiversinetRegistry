@@ -4,3 +4,4 @@ repo = "https://github.com/mikeryanmay/DiversinetRegistry.git"
 description = "Registry for Diversinet prerelease packages"
 
 [packages]
+c4df329e-200a-5808-ae44-368b7f2361b5 = { name = "Diversinet_jll", path = "jll/D/Diversinet_jll" }
